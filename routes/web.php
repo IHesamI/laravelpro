@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Listings;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,14 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view(
+        'listing',
+        [
+            'heading' => 'zarp namosan',
+            'listings' => Listings::all()
+
+        ]
+    );
 });
-Route::get('/hello', function () {
-    return response('<h1>Zarp namosan</h1>', 404,)
-        ->header('Content-Type', 'text-plain')
-        ->header('foo', 'bar');
+Route::get('/item/{id}', function ($id) {
+    return view('item', [
+        'listings' => Listings::find($id),
+    ]);
 });
-Route::get('/posts/{id}', function ($id) {
-    ddd($id);
-    return response('Post ' . $id);
-})->where('id','[0-9]+');
