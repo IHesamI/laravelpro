@@ -7,12 +7,15 @@
     @unless(count($listings)==0)
     @foreach($listings as $item)
     <x-item-card :item='$item' />
+
     @endforeach
     @else
     <p>No Item</p>
 
     @endunless
-
-
+</div>
+<div
+class="m-auto p-4">
+{{$listings->links()}}
 </div>
 @endsection
