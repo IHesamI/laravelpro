@@ -1,45 +1,18 @@
 @extends('layout')
+
 @section('content')
-{{--! first form --}}
-{{-- <h1>
-//    <?php
-  //  echo 
-    //?>
-</h1>
-//<?php foreach ($listings as $item) : ?>
-//    <h2> <?php echo $item['id'] ?></h2>
-//    <h2> <?php echo $item['title'] ?></h2>
-//<?php endforeach; ?> --}}
+@include('partials._hero')
+@include('partials._search')
+<div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
+    @unless(count($listings)==0)
+    @foreach($listings as $item)
+    <x-item-card :item='$item' />
+    @endforeach
+    @else
+    <p>No Item</p>
 
-{{--* second form --}}
-<h1>
-    {{$heading}}
-</h1>
-@php
-  $test=1
-  // <dd>test</dd>
-@endphp
-<h5>
-  {{$test}}
-</h5>
-{{-- if statement in php --}}
-{{-- @if(count($listings)==0)
-  <p>No Item</p>  
-  @endif --}}
-  
-  @unless(count($listings)==0)
-  @foreach($listings as $item)
-  <h2>
-  <a href="/item/{{$item['id']}}">
-  {{$item['title']}}
-    
-</a>
-</h2>
-@endforeach
+    @endunless
 
-  @else
-  <p>No Item</p>  
-  
-@endunless
 
+</div>
 @endsection
