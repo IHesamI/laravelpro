@@ -30,4 +30,5 @@ class Listings extends Model
                 ->orWhere('tags', 'like', '%' . request('search') . '%');
         }
     }
+    public function user(){}
 }
