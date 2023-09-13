@@ -7,11 +7,11 @@
     <x-card class="bg-black">
         {{-- <div class="bg-gray-50 border border-gray-200 p-10 rounded"> --}}
         <div class="flex flex-col items-center justify-center text-center">
-            <img class="w-48 mr-6 mb-6" src="{{asset('/images/no-image.png')}}" alt="" />
-
+            <img class="hidden w-48 mr-6 md:block" src="{{$item->logo? asset('storage/'.$item->logo) : asset('images/no-image.png')
+        }}" alt="">
             <h3 class="text-2xl mb-2">{{$item->title}}</h3>
             <div class="text-xl font-bold mb-4">{{$item->company}}</div>
-              <x-tags :tagsCsv='$item->tags'/>
+            <x-tags :tagsCsv='$item->tags' />
             <div class="text-lg my-4">
                 <i class="fa-solid fa-location-dot"></i> {{$item->location}}
             </div>
@@ -36,6 +36,27 @@
             </div>
         </div>
         {{-- </div> --}}
+    </x-card>
+    <x-card class="mt-4 p-2 flex space-x-6">
+        <a href="/listings/{{$item->id}}/edit">
+            <i class="fa-solid fa-pencil">
+                Edit
+            </i>
+        </a>
+        <form method="POST" action="/listings/{{$item->id}}">
+            @csrf
+            @method('DELETE')
+            <button
+            class="text-red-500">
+            <i
+            class="fa-solid fa-trash">
+            Delete
+
+            </i>
+
+            </button>
+        </form>
+
     </x-card>
 </div>
 @endsection
